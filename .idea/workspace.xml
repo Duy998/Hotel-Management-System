@@ -5,22 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88ac85b4-fe46-4019-bd25-5679d131e76e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nokia/hotel/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nokia/hotel/api/UserAPI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nokia/hotel/converter/UserConverter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nokia/hotel/dto/UserDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nokia/hotel/entity/UserEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nokia/hotel/repository/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nokia/hotel/service/IUserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nokia/hotel/service/impl/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/hotel-management-system-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/be/target/hotel-management-system-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/hotel-management-system-1.0-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/be/target/hotel-management-system-1.0-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/fe/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/fe/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/fe/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/App.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe/src/components/ListUserComponenet.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/components/ListUserComponenet.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,9 +28,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2YtUcRRDZag5E7BiDKAJnC7Qnsp" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -46,7 +41,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/1.BT_NOKIA/github_project/Hotel-Management-System",
+    "last_opened_file_path": "D:/1.BT_NOKIA/github_project/Hotel-Management-System/be",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"

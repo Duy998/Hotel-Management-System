@@ -1,8 +1,15 @@
+D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\dto\RoleDTO.java
+D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\service\IRoleService.java
+D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\service\impl\RoleService.java
+D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\converter\UserConverter.java
+D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\Main.java
+D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\repository\RoleRepository.java
+D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\dto\AbstractDTO.java
 D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\api\UserAPI.java
 D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\dto\UserDTO.java
 D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\service\impl\UserService.java
-D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\converter\UserConverter.java
 D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\service\IUserService.java
-D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\Main.java
 D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\entity\UserEntity.java
+D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\entity\BaseEntity.java
+D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\entity\RoleEntity.java
 D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\repository\UserRepository.java
