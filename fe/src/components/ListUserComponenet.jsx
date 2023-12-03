@@ -1,6 +1,7 @@
 // Listusercomponenet.jsx
 import React, { Component } from 'react';
 import UserService from '../services/UserService';
+import { request } from '../axios_helper';
 
 class Listusercomponenet extends Component {
   constructor(props) {
@@ -12,9 +13,16 @@ class Listusercomponenet extends Component {
   }
 
   componentDidMount() {
-    UserService.getAllUsers().then((res) => {
-      this.setState({ users: res.data });
-    });
+    // UserService.getAllUsers().then((res) => {
+    //   this.setState({ users: res.data });
+    // });
+    request(
+      "GET",
+      "/users",
+      {}
+    ).then((response) => {
+      this.setState({users: response.data})
+    })
   }
 
   render() {

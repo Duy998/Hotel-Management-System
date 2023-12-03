@@ -1,31 +1,36 @@
 package com.nokia.hotel.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class UserEntity {
-    @Id
-    @Column(length = 10)
-    public String userID;
-    @Column(length = 50)
-    public String fullName;
-    @Column(length = 8)
-    public String passWord;
+public class UserEntity extends BaseEntity{
+    @Column(name = "username")
+    private String userName;
+
+    @Column(name = "fullname")
+    private String fullName;
+    @Column(name = "password")
+    private String password;
     @Column(length = 50)
     public String email;
     @Column(length = 11)
-    public String phoneNumber;
+    public String phone;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "role_id", nullable = false))
+    private List<RoleEntity> roles = new ArrayList<>();
 
-    public String getUserID() {
-        return userID;
+
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getFullName() {
@@ -36,12 +41,12 @@ public class UserEntity {
         this.fullName = fullName;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -52,11 +57,19 @@ public class UserEntity {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public List<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<RoleEntity> roles) {
+        this.roles = roles;
     }
 }

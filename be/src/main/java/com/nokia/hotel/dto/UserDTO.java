@@ -1,18 +1,41 @@
 package com.nokia.hotel.dto;
 
-public class UserDTO {
+import com.nokia.hotel.entity.RoleEntity;
 
-    private String userID;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class UserDTO extends AbstractDTO<UserDTO>{
+
+    private String userName;
+
+
     private String fullName;
-    private String passWord;
-    private String email;
-    private String phoneNumber;
 
-    public String getUserID() {
-        return userID;
+    private String password;
+
+    public String email;
+
+    public String phone;
+
+    private String roleCode;
+    private List<RoleEntity> roles = new ArrayList<>();
+
+    public String getRoleCode() {
+        return roleCode;
     }
-    public void setUserID(String userID) {
-        this.userID = userID;
+
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getFullName() {
@@ -23,12 +46,12 @@ public class UserDTO {
         this.fullName = fullName;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -39,11 +62,19 @@ public class UserDTO {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public List<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<RoleEntity> roles) {
+        this.roles = roles;
     }
 }
