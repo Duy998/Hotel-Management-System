@@ -47,11 +47,17 @@ public class UserService implements IUserService {
 
     @Override
     public UserDTO RegisterUser(UserDTO userDTO) {
+        UserDTO result = new UserDTO();
         UserEntity userEntity = userConverter.ConverterToEntity(userDTO);
-        RoleEntity role = roleRepository.findOneByCode(userDTO.getRoleCode());
+        RoleEntity role = roleRepository.findOneByCode("USER");
         userEntity.setRoles(Stream.of(role).collect(Collectors.toList()));
-
-        return userConverter.ConverterToDTO(userRepository.save(userEntity));
+        UserEntity getByUsername = userRepository.findOneByUserName(userEntity.getUserName());
+        if(getByUsername != null){
+            result.setMessage("User da ton tai");
+            return result;
+        }
+        result = userConverter.ConverterToDTO(userRepository.save(userEntity));
+        return result;
     }
 
     @Override
@@ -59,8 +65,16 @@ public class UserService implements IUserService {
         UserEntity userEntity = userConverter.ConverterToEntity(userDTO);
 //        UserEntity user = userRepository.
 //        #RoleEntity role = roleRepository.findOneByCode(userDTO.getRoleCode());
-        UserEntity user = userRepository.findOneByUserName(userEntity.getUserName());
-        UserDTO userDTO1 = userConverter.ConverterToDTO(user);
+        UserEntity user = userRepository.findByUserNameAndPassword(userEntity.getUserName(),userEntity.getPassword());
+        UserDTO userDTO1 = new UserDTO();
+        if(user == null){
+            userDTO1.setMessage("user or password khong dung");
+            return  userDTO1;
+        }
+        userDTO1 = userConverter.ConverterToDTO(user);
+        for ( RoleEntity role : user.getRoles()) {
+            userDTO1.setRoleCode(role.getCode());
+        }
         return userDTO1;
     }
 }

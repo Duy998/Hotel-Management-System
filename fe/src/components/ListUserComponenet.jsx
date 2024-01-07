@@ -1,6 +1,7 @@
 // Listusercomponenet.jsx
 import React, { Component } from 'react';
-import UserService from '../services/UserService';
+import { useLocation } from 'react-router-dom';
+// import UserService from '../services/UserService';
 import { request } from '../axios_helper';
 
 class Listusercomponenet extends Component {
@@ -18,8 +19,7 @@ class Listusercomponenet extends Component {
     // });
     request(
       "GET",
-      "/users",
-      {}
+      "/api/user"
     ).then((response) => {
       this.setState({users: response.data})
     })
@@ -28,6 +28,7 @@ class Listusercomponenet extends Component {
   render() {
     return (
       <div>
+        {/* <p>Vai trò người dùng: {role}</p> */}
         <h2 className="text-center">Users List</h2>
         <table className="table">
           <thead>
@@ -35,15 +36,16 @@ class Listusercomponenet extends Component {
               <th>Firstname</th>
               <th>Lastname</th>
               <th>Email</th>
+              <th>Phone</th>
             </tr>
           </thead>
           <tbody>
             {this.state.users.map((user) => (
               <tr key={user.userID}>
-                <td>{user.fullName}</td>
-                <td>{user.passWord}</td>
-                <td>{user.email}</td>
-                <td>{user.phoneNumber}</td>
+                <td key={user.fullName}>{user.fullName}</td>
+                <td key={user.passWord}>{user.passWord}</td>
+                <td key={user.email}>{user.email}</td>
+                <td key={user.phoneNumber}>{user.phoneNumber}</td>
               </tr>
             ))}
           </tbody>

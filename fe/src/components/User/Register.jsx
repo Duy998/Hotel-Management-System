@@ -27,29 +27,68 @@ class Register extends Component {
     }
 
     // Kiểm tra xác nhận mật khẩu
-    isPasswordMatch = () => {
-        const { password, confirm_password } = this.state;
+    isPasswordMatch = (password, confirm_password) => {
         return password === confirm_password;
     }
 
+    verifyEmail= (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+
+    }
+
+    isValidLength = () => {
+        const { username, password } = this.state;
+        const minLength = 8; // Độ dài tối thiểu cho username và password
+    
+        return username.length >= minLength && password.length >= minLength;
+    }
+
+    // Kiểm tra trường input không được để trống
+    isNotEmpty = (value) => {
+        return value.trim() !== ''; // Kiểm tra xem giá trị sau khi loại bỏ các khoảng trắng có khác rỗng không
+    }
+    isValidPhone= (value)=> {
+        const phoneRegex = /^\d{0,10}$/;
+        return phoneRegex.test(value);
+    }
     // Xử lý khi người dùng nhấn nút đăng ký
     handleSubmit = (event) => {
         event.preventDefault();
+        const { username, password, confirm_password, email, phone } = this.state;
 
-        if (!this.isPasswordMatch()) {
+        if (!this.isNotEmpty(username) || !this.isNotEmpty(password) || !this.isNotEmpty(confirm_password) || !this.isNotEmpty(email) || !this.isNotEmpty(phone)) {
+            alert("All fields must be filled. Please check again.");
+            return;
+        }
+        if (!this.isPasswordMatch(password, confirm_password)) {
             alert("Passwords do not match. Please check again.");
             return;
         }
+        
+        if (!this.verifyEmail(email)){
+            alert("Invalid email address. Please enter a valid email.");
+            return;
+        }
 
+        if (!this.isValidLength()) {
+            alert("Username and password must be at least 8 characters long.");
+            return;
+        }
+
+        if(!this.isValidPhone(phone)){
+            alert("Phone Invalid. Please enter a valid phone.");
+            return;
+        }
         request(
             "POST",
-            "/users",
+            "/api/user/register",
             {
-                userID: 10,
+                userName: this.state.username,
                 fullName: this.state.username,
-                passWord: this.state.password,
+                password: this.state.password,
                 email: this.state.email,
-                phoneNumber: this.state.phone
+                phone: this.state.phone
             }).then((response) => {
                 this.setState({ registrationSuccess: true, successMessage: "Registration successful!", redirectToLogin: true }, () => {
                     // Callback function to execute after state is updated
@@ -60,13 +99,11 @@ class Register extends Component {
             })
             .catch((error) => {
                 console.error("Error registering user:", error);
+                alert("Error registering user");
             });
 
     }
-   
-    handleOkButtonClick = () => {
-        this.setState({ navigateToUsers: true });
-    }
+
 
     render() {
         if (this.state.registrationSuccess) {

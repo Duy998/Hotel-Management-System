@@ -29,7 +29,7 @@ public class UserAPI {
         return iUserService.RegisterUser(dto);
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public UserDTO Login(@RequestBody UserDTO dto){
         return iUserService.Login(dto);
     }

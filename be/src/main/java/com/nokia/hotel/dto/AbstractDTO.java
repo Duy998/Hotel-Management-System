@@ -10,6 +10,16 @@ public class AbstractDTO<T> implements Serializable {
     private Date modifiedDate;
     private String modifiedBy;
 
+    private String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public Long getId() {
         return id;
     }

@@ -10,6 +10,7 @@ com\nokia\hotel\dto\AbstractDTO.class
 com\nokia\hotel\entity\UserEntity.class
 com\nokia\hotel\entity\RoleEntity.class
 com\nokia\hotel\repository\RoleRepository.class
+com\nokia\hotel\utils\VerifyInput.class
 com\nokia\hotel\dto\UserDTO.class
 com\nokia\hotel\service\impl\UserService.class
 com\nokia\hotel\service\IRoleService.class

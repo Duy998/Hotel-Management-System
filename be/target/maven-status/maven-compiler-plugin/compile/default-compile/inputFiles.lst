@@ -10,6 +10,7 @@ D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\
 D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\service\impl\UserService.java
 D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\service\IUserService.java
 D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\entity\UserEntity.java
+D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\utils\VerifyInput.java
 D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\entity\BaseEntity.java
 D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\entity\RoleEntity.java
 D:\1.BT_NOKIA\github_project\Hotel-Management-System\be\src\main\java\com\nokia\hotel\repository\UserRepository.java
