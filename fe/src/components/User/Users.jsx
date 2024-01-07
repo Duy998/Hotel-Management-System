@@ -13,16 +13,20 @@ class Users extends Component {
         this.state = {
           users: [],
         };
+        this.state = {
+          users: [],
+          searchKeyword: "",
+        };
       }
 
     componentDidMount() {
-      request(
-        "GET",
-        "/api/user"
-      ).then((response) => {
-        this.setState({users: response.data})
-        console.log(response.data)
-      })
+      // request(
+      //   "GET",
+      //   "/api/user"
+      // ).then((response) => {
+      //   this.setState({users: response.data})
+      //   console.log(response.data)
+      // })
     }
 
     remove = (event) => {
@@ -44,7 +48,13 @@ class Users extends Component {
         return (
     <div class="container">
         <h1>Danh sách Nhà cung cấp</h1>
-        <table class="table table-borderd">
+        <input
+    type="text"
+    placeholder="Nhập từ khóa tìm kiếm..."
+    value={this.state.searchKeyword}
+    onChange={this.handleSearchChange}
+  />
+        <table className="table table-borderd">
             <thead>
                 <tr>
                     <th>FullName</th>
@@ -80,6 +90,9 @@ class Users extends Component {
     </div>
         );
     }
+    handleSearchChange = (event) => {
+      this.setState({ searchKeyword: event.target.value });
+    };    
 }
 
 
