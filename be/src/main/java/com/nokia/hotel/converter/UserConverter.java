@@ -9,6 +9,7 @@ public class UserConverter {
 
     public UserDTO ConverterToDTO(UserEntity entity){
         UserDTO dto = new UserDTO();
+        dto.setId(entity.getId());
         dto.setUserName(entity.getUserName());
         dto.setFullName(entity.getFullName());
         dto.setPassword(entity.getPassword());

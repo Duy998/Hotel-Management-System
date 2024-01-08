@@ -55,7 +55,7 @@ class Login extends Component {
         const { statusLogin, role } = this.state;
         if (statusLogin) {
             // Nếu statusLogin là true, chuyển hướng đến trang Users
-            return <Navigate to="/users"/>;
+            return <Navigate to="/admin#"/>;
         }
         return (
             <div className={styles.register_form_container}>

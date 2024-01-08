@@ -77,4 +77,11 @@ public class UserService implements IUserService {
         }
         return userDTO1;
     }
+
+    @Override
+    public UserDTO getUser(Long id) {
+        UserEntity user = userRepository.findOneById(id);
+        UserDTO userDTO = userConverter.ConverterToDTO(user);
+        return userDTO;
+    }
 }

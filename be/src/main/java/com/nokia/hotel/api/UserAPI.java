@@ -33,4 +33,23 @@ public class UserAPI {
     public UserDTO Login(@RequestBody UserDTO dto){
         return iUserService.Login(dto);
     }
+    @GetMapping("/{id}")
+    public UserDTO getUserById(@PathVariable Long id) {
+        return iUserService.getUser(id);
+    }
+
+    @PutMapping("/{id}")
+    public UserDTO updateUserById(@PathVariable Long id, @RequestBody UserDTO updatedUser){
+        System.out.print(updatedUser);
+        System.out.print(id);
+        return null;
+    }
+
+    @DeleteMapping("/{id}")
+    public UserDTO deleteUserById(@PathVariable Long id){
+        System.out.print(id);
+        System.out.print(id);
+
+        return null;
+    }
 }

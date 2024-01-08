@@ -1,27 +1,95 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Navigate } from 'react-router-dom'; // Corrected import
-import styles from './styles.module.css';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { request } from '../../axios_helper';
 
-class UpdateUser extends Component {
+const UpdateUser = () => {
+  const { id } = useParams();
+  const [user, setUser] = useState({
+    userName: '',
+    email: '',
+    phone: '',
+  });
 
-  constructor(props) {
-    super(props);
-  
-    this.state = {
-      users: [],
-    };
-  }
+  useEffect(() => {
+    request("GET", `/api/user/${id}`)
+      .then(response => {
+        setUser(response.data);
+      })
+      .catch(error => {
+        console.error("Lỗi khi lấy thông tin user:", error);
+      });
+  }, [id]);
 
-  render() {
-    return (
-      <div className="container"> {/* Corrected class to className */}
-        <h1>Danh sách Nhà cung cấp</h1>
-      </div>
-    );
-  }
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
+  };
 
-}
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Gọi API hoặc thực hiện các bước cần thiết để cập nhật user
+    request("PUT", `/api/user/${id}`, user)
+      .then(response => {
+        // Xử lý kết quả cập nhật thành công
+        console.log('User updated successfully');
+      })
+      .catch(error => {
+        console.error("Lỗi khi cập nhật user:", error);
+      });
+  };
+
+  return (
+    <div className="main-login main-center">
+      <form onSubmit={handleSubmit} className='form-horizontal'>
+        <div className="form-group">
+          <label className='cols-sm-2 control-label'>Username</label>
+          <div className='cols-sm-10'>
+            <input
+              className="form-control"
+              type="text"
+              name="username"
+              placeholder="Enter your username..."
+              value={user.userName || ''}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label className='cols-sm-2 control-label'>Email</label>
+          <div className='cols-sm-10'>
+            <input
+              className="form-control"
+              type="email"
+              name="email"
+              placeholder="Enter your email..."
+              value={user.email || ''}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label className='cols-sm-2 control-label'>Phone</label>
+          <div className='cols-sm-10'>
+            <input
+              className="form-control"
+              type="text"
+              name="phone"
+              placeholder="Enter your phone..."
+              value={user.phone || ''}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        <button type="submit" className="btn btn-primary">Update User</button>
+      </form>
+    </div>
+  );
+};
 
 export default UpdateUser;

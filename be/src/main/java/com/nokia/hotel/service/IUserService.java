@@ -12,4 +12,7 @@ public interface IUserService {
     UserDTO RegisterUser(UserDTO userDTO);
 
     UserDTO Login(UserDTO userDTO);
+
+    UserDTO getUser(Long id);
+
 }
