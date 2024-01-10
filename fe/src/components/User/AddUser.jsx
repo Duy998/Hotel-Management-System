@@ -3,27 +3,29 @@ import { request } from '../../axios_helper';
 import { Navigate } from "react-router-dom";
 import styles from './styles.module.css';
 
-class Register extends Component {
+class AddUser extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
             username: '',
+            fullName: '',
             password: '',
             confirm_password: '',
             email: '',
             phone: '',
             successMessage: '',
-            registrationSuccess: false,
-            redirectToLogin: false  
+            addSuccess: false,
+            redirectToListUser: false
         };
     }
-    
+
     // Cập nhật state khi người dùng nhập vào các trường
     handleChange = (event) => {
         const { name, value } = event.target;
         this.setState({ [name]: value });
+        console.log(this.state);
     }
 
     // Kiểm tra xác nhận mật khẩu
@@ -31,7 +33,7 @@ class Register extends Component {
         return password === confirm_password;
     }
 
-    verifyEmail= (email) => {
+    verifyEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
 
@@ -40,7 +42,7 @@ class Register extends Component {
     isValidLength = () => {
         const { username, password } = this.state;
         const minLength = 8; // Độ dài tối thiểu cho username và password
-    
+
         return username.length >= minLength && password.length >= minLength;
     }
 
@@ -48,7 +50,7 @@ class Register extends Component {
     isNotEmpty = (value) => {
         return value.trim() !== ''; // Kiểm tra xem giá trị sau khi loại bỏ các khoảng trắng có khác rỗng không
     }
-    isValidPhone= (value)=> {
+    isValidPhone = (value) => {
         const phoneRegex = /^\d{0,10}$/;
         return phoneRegex.test(value);
     }
@@ -56,7 +58,7 @@ class Register extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const { username, password, confirm_password, email, phone } = this.state;
-
+        console.log(this.state);
         if (!this.isNotEmpty(username) || !this.isNotEmpty(password) || !this.isNotEmpty(confirm_password) || !this.isNotEmpty(email) || !this.isNotEmpty(phone)) {
             alert("All fields must be filled. Please check again.");
             return;
@@ -65,8 +67,8 @@ class Register extends Component {
             alert("Passwords do not match. Please check again.");
             return;
         }
-        
-        if (!this.verifyEmail(email)){
+
+        if (!this.verifyEmail(email)) {
             alert("Invalid email address. Please enter have @ and .com");
             return;
         }
@@ -76,26 +78,26 @@ class Register extends Component {
             return;
         }
 
-        if(!this.isValidPhone(phone)){
+        if (!this.isValidPhone(phone)) {
             alert("Phone Invalid. Please enter a valid phone.");
             return;
         }
         request(
             "POST",
-            "/api/user/register",
+            "/api/user",
             {
-                userName: this.state.username,
-                fullName: this.state.username,
+                username: this.state.username,
+                fullName: this.state.fullName,
                 password: this.state.password,
                 email: this.state.email,
-                phone: this.state.phone
+                phoneNumber: this.state.phone
             }).then((response) => {
-                this.setState({ registrationSuccess: true, successMessage: "Registration successful!", redirectToLogin: true }, () => {
+                this.setState({ addSuccess: true, successMessage: "Add user successful!", redirectToListUser: true }, () => {
                     // Callback function to execute after state is updated
                     alert(this.state.successMessage);
                     // Perform any other actions you need here
                 });
-                
+
             })
             .catch((error) => {
                 console.error("Error registering user:", error);
@@ -106,91 +108,107 @@ class Register extends Component {
 
 
     render() {
-        if (this.state.registrationSuccess) {
+        if (this.state.addSuccess) {
             // Nếu redirectToUsers là true, chuyển hướng đến trang Users
             return <Navigate to="/admin" />;
         }
-        return (   
+        return (
 
-<div className="main-login main-center">
-            <form onSubmit={this.handleSubmit} className='form-horizontal'>
-                {/* ===username=== */}
-                <div className="form-group">
-                    <label className='cols-sm-2 control-label'>UserName</label>
-                    <div className='cols-sm-10'>
-                        <span className="input-group-addon"><i className="fa fa-user fa" aria-hidden="true"></i></span>
-                        <input 
+            <div className="main-login main-center">
+                <form onSubmit={this.handleSubmit} className='form-horizontal'>
+                    {/* ===fullname=== */}
+                    <div className="form-group">
+                        <label className='cols-sm-2 control-label'>FullName</label>
+                        <div className='cols-sm-10'>
+                            <span className="input-group-addon"><i className="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input
+                                style={{ fontSize: '15px' }}
+                                className="form-control"
+                                type="text"
+                                name="fullName"
+                                placeholder="Enter your full name..."
+                                value={this.state.fullName}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                    </div>
+                    {/* ===username=== */}
+                    <div className="form-group">
+                        <label className='cols-sm-2 control-label'>UserName</label>
+                        <div className='cols-sm-10'>
+                            <span className="input-group-addon"><i className="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input
+                                style={{ fontSize: '15px' }}
+                                className="form-control"
+                                type="text"
+                                name="username"
+                                placeholder="Enter your username..."
+                                value={this.state.username}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                    </div>
+                    {/* password */}
+                    <div className="form-group">
+                        <label>Password</label>
+                        <input
                             style={{ fontSize: '15px' }}
-                            className="form-control"
-                            type="text"
-                            name="username"
-                            placeholder="Enter your username..."
-                            value={this.state.username}
-                            onChange={this.handleChange} 
+                            className="form-control form-control-lg"
+                            type="password"
+                            name="password"
+                            placeholder="Enter your password..."
+                            value={this.state.password}
+                            onChange={this.handleChange}
                         />
                     </div>
-                </div>
-                {/* password */}
-                <div className="form-group">
-                    <label>Password</label>
-                    <input
-                        style={{ fontSize: '15px' }}
-                        className="form-control form-control-lg"
-                        type="password"
-                        name="password"
-                        placeholder="Enter your password..."
-                        value={this.state.password}
-                        onChange={this.handleChange}
-                    />
-                </div>
-                {/* confirm password */}
-                <div className="form-group">
-                    <label>Confirm Password</label>
-                    <input
-                        style={{ fontSize: '15px' }}
-                        className="form-control form-control-lg"
-                        type="password"
-                        name="confirm_password"
-                        placeholder="Enter your password again..."
-                        value={this.state.confirm_password}
-                        onChange={this.handleChange}
-                    />
-                </div>
-                {/* email */}
-                <div className="form-group">
-                    <label>Email</label>
-                    <input
-                        style={{ fontSize: '15px' }}
-                        className="form-control form-control-lg"
-                        type="text"
-                        name="email"
-                        placeholder="Enter your email..."
-                        value={this.state.email}
-                        onChange={this.handleChange}
-                    />
-                </div>
-                {/* phone */}
-                <div className="form-group">
-                    <label>Phone</label>
-                    <input
-                        style={{ fontSize: '15px' }}
-                        className="form-control form-control-lg"
-                        type="text"
-                        name="phone"
-                        placeholder="Enter your phone..."
-                        value={this.state.phone}
-                        onChange={this.handleChange}
-                    />
-                </div>
-                <div className="text-center mt-2">
-                    <button type="submit" className="btn btn-lg btn-primary">Add User</button>
-                </div>
-            </form> 
-</div> 
+                    {/* confirm password */}
+                    <div className="form-group">
+                        <label>Confirm Password</label>
+                        <input
+                            style={{ fontSize: '15px' }}
+                            className="form-control form-control-lg"
+                            type="password"
+                            name="confirm_password"
+                            placeholder="Enter your password again..."
+                            value={this.state.confirm_password}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    {/* email */}
+                    <div className="form-group">
+                        <label>Email</label>
+                        <input
+                            style={{ fontSize: '15px' }}
+                            className="form-control form-control-lg"
+                            type="text"
+                            name="email"
+                            placeholder="Enter your email..."
+                            value={this.state.email}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    {/* phone */}
+                    <div className="form-group">
+                        <label>Phone</label>
+                        <input
+                            style={{ fontSize: '15px' }}
+                            className="form-control form-control-lg"
+                            type="text"
+                            name="phone"
+                            placeholder="Enter your phone..."
+                            value={this.state.phone}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="text-center mt-2">
+                        <button type="submit" className="btn btn-lg btn-primary">Add User</button>
+                    </div>
+                </form>
+            </div>
 
 
         );
     }
 }
 
-export default Register;
+export default AddUser;

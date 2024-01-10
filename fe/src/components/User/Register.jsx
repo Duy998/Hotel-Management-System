@@ -10,6 +10,7 @@ class Register extends Component {
 
         this.state = {
             username: '',
+            fullName: '',
             password: '',
             confirm_password: '',
             email: '',
@@ -23,7 +24,7 @@ class Register extends Component {
     // Cập nhật state khi người dùng nhập vào các trường
     handleChange = (event) => {
         const { name, value } = event.target;
-        this.setState({ [name]: value });
+        this.setState({ ...this.state, [name]: value });
     }
 
     // Kiểm tra xác nhận mật khẩu
@@ -65,6 +66,7 @@ class Register extends Component {
             alert("Passwords do not match. Please check again.");
             return;
         }
+    console.log(this.state);
         
         if (!this.verifyEmail(email)){
             alert("Invalid email address. Please enter a valid email.");
@@ -82,14 +84,15 @@ class Register extends Component {
         }
         request(
             "POST",
-            "/api/user/register",
+            "/api/register",
             {
                 userName: this.state.username,
-                fullName: this.state.username,
+                fullName: this.state.fullName,
                 password: this.state.password,
                 email: this.state.email,
-                phone: this.state.phone
+                phoneNumber: this.state.phone
             }).then((response) => {
+                console.log(response);
                 this.setState({ registrationSuccess: true, successMessage: "Registration successful!", redirectToLogin: true }, () => {
                     // Callback function to execute after state is updated
                     alert(this.state.successMessage);
@@ -122,6 +125,22 @@ class Register extends Component {
                     </div> 
                     <div className="main-login main-center">
                                 <form onSubmit={this.handleSubmit} className='form-horizontal'>
+                                    {/* ===fullname=== */}
+                                    <div className="form-group">
+                                        <label className='cols-sm-2 control-label'>FullName</label>
+                                        <div className='cols-sm-10'>
+                                            <span className="input-group-addon"><i className="fa fa-user fa" aria-hidden="true"></i></span>
+                                            <input 
+                                                style={{ fontSize: '15px' }}
+                                                className="form-control"
+                                                type="text"
+                                                name="fullName"
+                                                placeholder="Enter your full name..."
+                                                value={this.state.fullName}
+                                                onChange={this.handleChange} 
+                                            />
+                                        </div>
+                                    </div>
                                     {/* ===username=== */}
                                     <div className="form-group">
                                         <label className='cols-sm-2 control-label'>UserName</label>

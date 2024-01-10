@@ -6,49 +6,42 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseEntity implements Serializable {
+@JsonIgnoreProperties(value = { "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate" }, allowGetters = true)
+public abstract class BaseEntity<T> implements Serializable {
 
-    private static final long serialVersionUID = -863164858986274318L;
+    private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "createddate")
+    public abstract T getId();
+    
     @CreatedDate
-    private Date createdDate;
-
-    @Column(name = "createdby")
+    @Column(name = "created_date", updatable = false)
+    private Instant createdDate = Instant.now();
+    
     @CreatedBy
+    @Column(name = "created_by", nullable = false, length = 50, updatable = false)
     private String createdBy;
-
-    @Column(name = "modifieddate")
+    
     @LastModifiedDate
-    private Date modifiedDate;
-
-    @Column(name = "modifiedby")
+    @Column(name = "modified_date")
+    private Instant modifiedDate = Instant.now();
+    
     @LastModifiedBy
+    @Column(name = "modified_by", length = 50)
     private String modifiedBy;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getCreatedDate() {
+    public Instant getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(Instant createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -60,11 +53,11 @@ public class BaseEntity implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Date getModifiedDate() {
+    public Instant getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(Date modifiedDate) {
+    public void setModifiedDate(Instant modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 

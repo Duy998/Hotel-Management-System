@@ -2,6 +2,7 @@
 import axios from 'axios';
 
 const USER_API_BASE_URL = "http://localhost:8085/users";
+//const USER_API_BASE_URL = "http://hotel-management-system:8085/users"
 
 class UserService {
   getAllUsers() {

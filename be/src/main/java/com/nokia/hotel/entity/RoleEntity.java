@@ -1,27 +1,29 @@
 package com.nokia.hotel.entity;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+import java.io.Serializable;
+import java.util.Objects;
 @Entity
 @Table(name = "role")
-public class RoleEntity extends BaseEntity {
-    @Column(nullable = false)
+public class RoleEntity implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotNull
+    @Size(max = 50)
+    @Column(length = 50)
     private String name;
 
-    @Column(name = "code")
-    private String code;
-
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-    private List<UserEntity> users = new ArrayList<>();
-
-    public List<UserEntity> getUsers() {
-        return users;
+    public Long getId() {
+        return id;
     }
 
-    public void setUsers(List<UserEntity> users) {
-        this.users = users;
-    }
 
     public String getName() {
         return name;
@@ -31,11 +33,19 @@ public class RoleEntity extends BaseEntity {
         this.name = name;
     }
 
-    public String getCode() {
-        return code;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof RoleEntity)) {
+            return false;
+        }
+        return Objects.equals(name, ((RoleEntity) o).name);
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name);
     }
 }

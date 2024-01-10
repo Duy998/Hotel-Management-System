@@ -1,7 +1,9 @@
 package com.nokia.hotel.service;
 
-import com.nokia.hotel.dto.UserDTO;
-import org.apache.catalina.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import com.nokia.hotel.service.dto.UserDTO;
 
 import java.util.List;
 
@@ -9,9 +11,8 @@ public interface IUserService {
     List<UserDTO> getAllNew();
     UserDTO saveNew(UserDTO userDTO);
 
-    UserDTO RegisterUser(UserDTO userDTO);
-
-    UserDTO Login(UserDTO userDTO);
+    void registerUser(UserDTO userDTO);
+    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 
     UserDTO getUser(Long id);
 

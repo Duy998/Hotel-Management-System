@@ -13,34 +13,33 @@ class Login extends Component {
             username: '',
             password: '',
             statusLogin: false,
-            role: 'admin'
+            role: 'ROLE_USER'
         };
       }
-
+    
 
     // Cập nhật state khi người dùng nhập vào các trường
     handleChange = (event) => {
         const { name, value } = event.target;
-        this.setState({ [name]: value });
+        this.setState({ ...this.state, [name]: value})
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state)
+        console.log(this.state);
         const { username, password } = this.state;
         request(
             "POST",
-            "/api/user/login",
+            "/api/login",
             {
-                userName: username,
+                username: username,
                 password: password
             }).then((response) => {
                 console.log(response.data)
                 if(response.data.message){
                     alert("password or username Invalid");
                 }else{
-                    this.setState({ statusLogin: true });
-                    this.setState({role: response.data.fullName})
+                    this.setState({...this.state, statusLogin: true, role: response.data.roles}, () => console.log(this.state));
                     alert("Login successful!");
                 }
 

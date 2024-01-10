@@ -1,51 +1,65 @@
 package com.nokia.hotel.api;
 
-import com.nokia.hotel.dto.UserDTO;
+import com.nokia.hotel.payload.response.MessageResponse;
+import com.nokia.hotel.repository.UserRepository;
 import com.nokia.hotel.service.IUserService;
+import com.nokia.hotel.service.dto.UserDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api")
 public class UserAPI {
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     private IUserService iUserService;
 
-    @GetMapping
+    @Autowired
+    PasswordEncoder encoder;
+
+    @GetMapping("/user")
     public List<UserDTO> getUsers(){
         return iUserService.getAllNew();
     }
-    @PostMapping
-    public UserDTO postUsers(@RequestBody UserDTO dto){
-        return iUserService.saveNew(dto);
+    @PostMapping("/user")
+    public ResponseEntity<?> addUser(@RequestBody UserDTO dto){
+        if (userRepository.existsByUsername(dto.getUsername())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+        }
+
+        if (userRepository.existsByEmail(dto.getEmail())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+        }
+        if (userRepository.existsByPhone(dto.getPhoneNumber())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Phone number is already in use!"));
+        }
+        dto.setPassword(encoder.encode(dto.getPassword()));
+        iUserService.registerUser(dto);
+        return ResponseEntity.ok(new MessageResponse("Add user successfully!"));
     }
 
-    @PostMapping("/register")
-    public UserDTO Register(@RequestBody UserDTO dto){
-        return iUserService.RegisterUser(dto);
-    }
-
-    @PostMapping("/login")
-    public UserDTO Login(@RequestBody UserDTO dto){
-        return iUserService.Login(dto);
-    }
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     public UserDTO getUserById(@PathVariable Long id) {
         return iUserService.getUser(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/user/{id}")
     public UserDTO updateUserById(@PathVariable Long id, @RequestBody UserDTO updatedUser){
         System.out.print(updatedUser);
         System.out.print(id);
         return null;
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/user/{id}")
     public UserDTO deleteUserById(@PathVariable Long id){
         System.out.print(id);
         System.out.print(id);

@@ -73,3 +73,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+# Build and run app in docker container
+
+### Make sure MySQL server is running; see db/README for starting MySQL server. Make sure backend application is running; see be/README for starting backend application
+### Make sure backend host is hotel-management-system: const USER_API_BASE_URL = "http://hotel-management-system:8085/users" (file UserService.js)
+
+### Build frontend image:
+docker image build -t fe-app .
+
+### Start frontend application
+docker run --network employee-mysql -p 3000:3000 fe-app

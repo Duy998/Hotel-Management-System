@@ -18,10 +18,10 @@ class Listusercomponenet extends Component {
     // });
     request(
       "GET",
-      "/users",
+      "/api/user",
       {}
     ).then((response) => {
-      this.setState({users: response.data})
+      this.setState({...this.state, users: response.data}, () => console.log(this.state));
     })
   }
 
