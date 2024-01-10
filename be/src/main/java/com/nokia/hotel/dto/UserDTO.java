@@ -2,7 +2,7 @@ package com.nokia.hotel.dto;
 
 import com.nokia.hotel.entity.RoleEntity;
 
-import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 

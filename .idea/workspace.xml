@@ -6,16 +6,30 @@
   <component name="ChangeListManager">
     <list default="true" id="88ac85b4-fe46-4019-bd25-5679d131e76e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/be/target/hotel-management-system-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/be/target/hotel-management-system-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/be/target/hotel-management-system-1.0-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/be/target/hotel-management-system-1.0-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fe/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/fe/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fe/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/fe/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fe/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/fe/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fe/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fe/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fe/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/App.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fe/src/components/ListUserComponenet.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/components/ListUserComponenet.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fe/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/be/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/be/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/be/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/classes/com/nokia/hotel/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/classes/com/nokia/hotel/api/UserAPI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/classes/com/nokia/hotel/converter/UserConverter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/classes/com/nokia/hotel/dto/AbstractDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/classes/com/nokia/hotel/dto/RoleDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/classes/com/nokia/hotel/dto/UserDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/classes/com/nokia/hotel/entity/BaseEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/classes/com/nokia/hotel/entity/RoleEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/classes/com/nokia/hotel/entity/UserEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/classes/com/nokia/hotel/repository/RoleRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/classes/com/nokia/hotel/repository/UserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/classes/com/nokia/hotel/service/IRoleService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/classes/com/nokia/hotel/service/IUserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/classes/com/nokia/hotel/service/impl/RoleService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/classes/com/nokia/hotel/service/impl/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/classes/com/nokia/hotel/utils/VerifyInput.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/hotel-management-system-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/hotel-management-system-1.0-SNAPSHOT.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/be/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/be/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,10 +55,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/1.BT_NOKIA/github_project/Hotel-Management-System/be",
+    "last_opened_file_path": "D:/1.BT_NOKIA/github_project/new_code/Hotel-Management-System/be",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "configurable.group.language"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -57,5 +72,16 @@
       <updated>1701344449276</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
