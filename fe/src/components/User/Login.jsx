@@ -39,7 +39,7 @@ class Login extends Component {
                 if(response.data.message){
                     alert("password or username Invalid");
                 }else{
-                    this.setState({...this.state, statusLogin: true, role: response.data.roles}, () => console.log(this.state));
+                    this.setState({...this.state, statusLogin: true, role: response.data.roles, id: response.data.id}, () => console.log(this.state));
                     alert("Login successful!");
                 }
 
@@ -51,10 +51,13 @@ class Login extends Component {
     }  
 
     render() {
-        const { statusLogin, role } = this.state;
+        const { statusLogin, role, id } = this.state;
         if (statusLogin) {
-            // Nếu statusLogin là true, chuyển hướng đến trang Users
-            return <Navigate to="/admin#"/>;
+            if(role == "ADMIN"){
+                return <Navigate to="/admin#"/>;
+            }
+                return <Navigate to={`/customer/${id}`} />;
+            
         }
         return (
             <div className={styles.register_form_container}>

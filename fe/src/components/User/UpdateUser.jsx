@@ -4,7 +4,7 @@ import { request } from '../../axios_helper';
 import { Navigate } from "react-router-dom";
 
 const UpdateUser = () => {
-  const { id } = useParams();
+  const { id, role } = useParams();
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [user, setUser] = useState({
     fullName: '',
@@ -46,7 +46,11 @@ const UpdateUser = () => {
   };
   if (registrationSuccess) {
     // You can conditionally render or redirect to another page after successful update
-    return <Navigate to="/admin" />;
+    // if(role= "customer"){
+    //   return <Navigate to="/customer "/>;
+    // }
+    return <Navigate to={`/customer/${user.id}`} />;
+
   }
   return (
     
