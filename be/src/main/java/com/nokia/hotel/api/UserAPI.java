@@ -56,14 +56,11 @@ public class UserAPI {
     public UserDTO updateUserById(@PathVariable Long id, @RequestBody UserDTO updatedUser){
         System.out.print(updatedUser);
         System.out.print(id);
-        return null;
+        return iUserService.updateUser(updatedUser, id);
     }
 
     @DeleteMapping("/user/{id}")
     public UserDTO deleteUserById(@PathVariable Long id){
-        System.out.print(id);
-        System.out.print(id);
-
-        return null;
+        return iUserService.deleteUser(id);
     }
 }

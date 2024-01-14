@@ -37,6 +37,7 @@ public class RoomTypeEntity implements Serializable {
     private String description;
 
 
+
     public String getImageUrl() {
         return imageUrl;
     }

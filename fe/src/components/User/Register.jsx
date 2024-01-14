@@ -86,7 +86,7 @@ class Register extends Component {
             "POST",
             "/api/register",
             {
-                userName: this.state.username,
+                username: this.state.username,
                 fullName: this.state.fullName,
                 password: this.state.password,
                 email: this.state.email,
