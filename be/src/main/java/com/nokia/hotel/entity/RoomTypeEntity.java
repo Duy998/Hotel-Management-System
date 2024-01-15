@@ -13,7 +13,7 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name = "room_type")
 public class RoomTypeEntity implements Serializable {
-     private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +36,19 @@ public class RoomTypeEntity implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "amount")
+    private int amount;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 
     public String getImageUrl() {
         return imageUrl;

@@ -14,7 +14,9 @@ public interface IHotelService {
 
 	public HotelEntity updateHotel(HotelDto hotelDto, Long hotelId);
 
-	public HotelEntity deleteHotel(Long hotelId);
+	public boolean deleteHotel(Long hotelId);
 
-	public HotelEntity getHotelsByName(String name);    
+	public HotelEntity getHotelsByName(String name);
+
+	public boolean existHotel(Long id);
 }

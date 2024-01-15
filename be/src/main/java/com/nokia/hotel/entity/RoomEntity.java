@@ -10,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,11 +21,13 @@ public class RoomEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "room_number")
-    private int roomNumber;
+    @Column(name = "room_name")
+    private String roomName;
 
-	
-    @OneToOne(cascade = CascadeType.ALL)
+    @Column(name = "is_actived")
+    private boolean isActived;
+
+    @ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "room_type_id", referencedColumnName = "id")
 	private RoomTypeEntity roomType;
 
@@ -34,15 +35,24 @@ public class RoomEntity implements Serializable {
 	@JoinColumn(name = "hotel_id", referencedColumnName = "id")
 	private HotelEntity hotel;
 
+    public void setId(Long id) {
+        this.id = id;
+    }
     public Long getId() {
         return id;
     }
-    public int getRoomNumber() {
-        return roomNumber;
+    public String getRoomName() {
+        return roomName;
     }
-
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
+	
+    public boolean isActived() {
+        return isActived;
+    }
+    public void setActived(boolean isActived) {
+        this.isActived = isActived;
+    }
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
 	public RoomTypeEntity getRoomType() {

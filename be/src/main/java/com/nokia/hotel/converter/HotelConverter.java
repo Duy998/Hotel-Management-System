@@ -3,21 +3,34 @@ package com.nokia.hotel.converter;
 import org.springframework.stereotype.Component;
 
 import com.nokia.hotel.entity.HotelEntity;
+import com.nokia.hotel.payload.response.HotelResponse;
 import com.nokia.hotel.service.dto.HotelDto;
-import com.googlecode.jmapper.JMapper;
-import com.googlecode.jmapper.api.JMapperAPI;
 
 @Component
 public class HotelConverter {
     public HotelEntity convert(HotelDto hotelDto) {
-        JMapperAPI api = new JMapperAPI().add(JMapperAPI.mappedClass(HotelEntity.class));
-        JMapper<HotelEntity,HotelDto> jMapper = new JMapper<>(HotelEntity.class, HotelDto.class, api);
-        return jMapper.getDestination(hotelDto);
+       HotelEntity entity = new HotelEntity();
+       entity.setAddress(hotelDto.getAddress());
+       entity.setName(hotelDto.getName());
+       entity.setDescription(hotelDto.getDescription());
+       entity.setImageUrl(hotelDto.getImageUrl());
+       return entity;       
     }
 
     public HotelDto convert(HotelEntity hotelEntity) {
-        JMapperAPI api = new JMapperAPI().add(JMapperAPI.mappedClass(HotelDto.class));
-        JMapper<HotelDto, HotelEntity> jMapper = new JMapper<>(HotelDto.class, HotelEntity.class, api);
-        return jMapper.getDestination(hotelEntity);
+        HotelDto hotelDto = new HotelDto();
+        hotelDto.setId(hotelEntity.getId());
+        hotelDto.setAddress(hotelEntity.getAddress());
+        hotelDto.setName(hotelEntity.getName());
+        hotelDto.setDescription(hotelEntity.getDescription());
+        hotelDto.setImageUrl(hotelEntity.getImageUrl());
+        return hotelDto;
+    }
+
+    public HotelResponse convertTHotelResponse(HotelEntity hotelEntity) {
+        HotelResponse response = new HotelResponse();
+        response.setId(hotelEntity.getId());
+        response.setName(hotelEntity.getName());
+        return response;
     }
 }

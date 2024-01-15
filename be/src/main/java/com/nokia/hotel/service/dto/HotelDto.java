@@ -3,9 +3,16 @@ package com.nokia.hotel.service.dto;
 import java.util.List;
 
 public class HotelDto {
-    private int id;	
+    private Long id;	
 
-	private String name;
+	public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    private String name;
 	
 	private String address;
 
@@ -15,9 +22,7 @@ public class HotelDto {
 
 	private List<RoomDto> rooms;
 
-    public int getId() {
-        return id;
-    }
+    
 	public String getName() {
         return name;
     }

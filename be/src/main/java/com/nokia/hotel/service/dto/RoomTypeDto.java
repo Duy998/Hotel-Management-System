@@ -13,6 +13,18 @@ public class RoomTypeDto {
 
     private String description;
 
+    private int amount;
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 
     public String getImageUrl() {
         return imageUrl;

@@ -21,6 +21,9 @@ public class HotelEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;	
 
+    public void setId(Long id) {
+        this.id = id;
+    }
     @Column(name = "name")	
 	private String name;
 	
@@ -73,6 +76,6 @@ public class HotelEntity implements Serializable {
     }
     public void setRooms(List<RoomEntity> rooms) {
         this.rooms = rooms;
-    }
+    }    
 
 }

@@ -1,7 +1,6 @@
 package com.nokia.hotel.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,7 @@ public class HotelService implements IHotelService {
 	
     @Autowired
     HotelConverter hotelConverter;
+
 	@Override
 	public HotelEntity addHotel(HotelDto hotelDto) {
 		HotelEntity hotel = hotelConverter.convert(hotelDto);
@@ -33,28 +33,20 @@ public class HotelService implements IHotelService {
 
 	@Override
 	public HotelEntity getHotelById(Long hotelId) {
-		Optional<HotelEntity> optionalHotel = hotelRepository.findById(hotelId);
-		if (!optionalHotel.isPresent()) {
-			throw new HotelNotFoundException("Hotel not found.");
-		}
-		return optionalHotel.get();
+		return hotelRepository.getReferenceById(hotelId);
 	}
 
 	@Override
 	public HotelEntity updateHotel(HotelDto hotelDto, Long hotelId) {
 		HotelEntity updatedHotel = hotelConverter.convert(hotelDto);
-		HotelEntity existingHotel = getHotelById(hotelId);
-		existingHotel.setAddress(updatedHotel.getAddress());
-		existingHotel.setRooms(updatedHotel.getRooms());
-		existingHotel.setName(updatedHotel.getName());
-		return hotelRepository.save(existingHotel);
+		updatedHotel.setId(hotelId);
+		return hotelRepository.save(updatedHotel);
 	}
 
 	@Override
-	public HotelEntity deleteHotel(Long hotelId) {
-		HotelEntity hotel = getHotelById(hotelId);
+	public boolean deleteHotel(Long hotelId) {
 		hotelRepository.deleteById(hotelId);
-		return hotel;
+		return !existHotel(hotelId);
 	}
 
 	@Override
@@ -67,5 +59,10 @@ public class HotelService implements IHotelService {
 			throw new HotelNotFoundException("Hotel not found.");
 		}
 		
+	}
+
+	@Override
+	public boolean existHotel(Long id) {
+		return hotelRepository.existsById(id);
 	}
 }
