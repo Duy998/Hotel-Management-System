@@ -1,7 +1,7 @@
 import styles from './MainApp.module.css'; // Import your CSS file
 import React, { useState } from 'react';
 import FormA from '../User/Users';
-import FormB from './FormB';
+import FormB from '../Hotel/ListHotel';
 import AddUser from '../User/AddUser';
 import AddHotel from '../Hotel/AddHotel'
 const MainApp = () => {
