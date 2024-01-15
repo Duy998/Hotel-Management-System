@@ -50,6 +50,7 @@ public class RoomTypeEntity implements Serializable {
         this.amount = amount;
     }
 
+
     public String getImageUrl() {
         return imageUrl;
     }

@@ -8,6 +8,7 @@ import Users from './components/User/Users'
 import UpdateUser from './components/User/UpdateUser'
 import MainApp from './components/Admin/MainApp';
 import AddUser from './components/User/AddUser';
+import Customer from './components/Customer/DetailCustomer'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
@@ -23,6 +24,12 @@ const App = () => {
             <Route path="/*" element={<NotFound/>}/>
             <Route path="/user/:id" exact={true} element={<UpdateUser/>}/>
             {/* <Route path="/user" exact={true} element={<AddUser/>}/> */}
+            {/* <Route path="/customer/:id" element={<Customer/>}/> */}
+
+            <Route path="/customer/:id" element={<Customer />} />
+            <Route path="/customer/:id" element={<Customer />} />
+            <Route path="/customer/:id" element={<Customer />} />
+
           </Routes>
       </Router>
     );

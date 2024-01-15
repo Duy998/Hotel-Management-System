@@ -32,22 +32,27 @@ class Users extends Component {
   remove = (id) => {
     request("DELETE", `/api/user/${id}`)
       .then(response => {
-        // Xử lý kết quả cập nhật thành công
-        console.log('User updated successfully');
-        alert(`User delete successfully ưith ${id}`);
+        console.log(response.data)
+
+        alert(`User delete successfully with ${response.data.username}`);
         window.location.reload();
       })
       .catch(error => {
-        console.error("Lỗi khi cập nhật user:", error);
+        alert(`User delete error with ${id}`);
+        window.location.reload();
       });
   }
 
   render() {
+    const { users, searchKeyword } = this.state;
+
+    // Filter users based on the search keyword
+    const filteredUsers = users.filter(user =>
+      user.username.toLowerCase().includes(searchKeyword.toLowerCase())
+    );
     return (
       <div>
-
         <div class="container">
-          <h1>Danh sách Nhà cung cấp</h1>
           <input
             type="text"
             placeholder="Nhập từ khóa tìm kiếm..."
@@ -63,17 +68,19 @@ class Users extends Component {
                 <th>UserName</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Role</th>
                 <th>Option</th>
               </tr>
             </thead>
             <tbody>
-              {this.state.users.map((user) => (
+              {filteredUsers.map((user) => (
                 <tr key={user.id} role="row" className="odd">
                   <td key={user.id}>{user.id}</td>
                   <td key={user.fullName}>{user.fullName}</td>
                   <td key={user.userName}>{user.username}</td>
                   <td key={user.email}>{user.email}</td>
                   <td key={user.phone}>{user.phoneNumber}</td>
+                  <td key={user.phone}>{user.roleCode}</td>
                   <td>
                     <ButtonGroup>
                       <Button style={{ "margin-right": '5px' }} tag={Link} to={"/user/" + user.id} className={`${styles.trash}  btn btn-primary btn-sm `}
