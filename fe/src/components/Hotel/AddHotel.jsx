@@ -1,70 +1,148 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { Component } from 'react';
 import { request } from '../../axios_helper';
-// import styles from './styles.module.css';
+import { Navigate } from "react-router-dom";
+import styles from './styles.module.css';
 
-const AddUser = () => {
-  const [users, setUsers] = useState([]);
-  const { id } = useParams();
+class AddHotel extends Component {
 
-  useEffect(() => {
-    // Gọi API hoặc thực hiện các hành động dựa trên user.id
-    console.log(id)
-    request("GET", `/api/user/${id}`)
-      .then(response => {
-        setUsers(response.data);
-        console.log(response.data);
-        // users = this.state.users;
-        // setUsers(users);
-      })
-      .catch(error => {
-        console.error("Lỗi khi lấy thông tin user:", error);
-      });
-  }, [id]);
+    constructor(props) {
+        super(props);
+        this.state = {
+            address: '',
+            description: '',
+            imageUrl: '',
+            name: '',
+            rooms: '',
+            successMessage: '',
+            addSuccess: false,
+            redirectToListUser: false
+        };
+    }
+
+    // Cập nhật state khi người dùng nhập vào các trường
+    handleChange = (event) => {
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
+        console.log(this.state);
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(this.state);
+        request(
+            "POST",
+            "/api/hotels",
+            {
+                name: this.state.name,
+                address: this.state.address,
+                description: this.state.description,
+                imageUrl: this.state.imageUrl
+                
+            }).then((response) => {
+                this.setState({ addSuccess: true, successMessage: "Add user successful!", redirectToListUser: true }, () => {
+                    // Callback function to execute after state is updated
+                    alert(this.state.successMessage);
+                    // Perform any other actions you need here
+                });
+
+            })
+            .catch((error) => {
+                console.error("Error registering user:", error);
+                alert("Error registering user");
+            });
+
+    }
 
 
+    render() {
+        if (this.state.addSuccess) {
+            // Nếu redirectToUsers là true, chuyển hướng đến trang Users
+            return <Navigate to="/admin" />;
+        }
+        return (
 
-  return (
-    <div className="container">
-        <h1>Add hotel</h1>
-
-        <div className="row">
-          <div className="col-md-3">
-            {/* Phần 3/7 của giao diện */}
-            <div>
-              <p>ID: {users.id}</p>
-              {/* Hiển thị các thông tin khác */}
+            <div className="main-login main-center">
+                <form onSubmit={this.handleSubmit} className='form-horizontal'>
+                    {/* ===fullname=== */}
+                    <div className="form-group">
+                        <label className='cols-sm-2 control-label'>address</label>
+                        <div className='cols-sm-10'>
+                            <span className="input-group-addon"><i className="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input
+                                style={{ fontSize: '15px' }}
+                                className="form-control"
+                                type="text"
+                                name="address"
+                                placeholder="Enter your full name..."
+                                value={this.state.address}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                    </div>
+                    {/* ===username=== */}
+                    <div className="form-group">
+                        <label className='cols-sm-2 control-label'>description</label>
+                        <div className='cols-sm-10'>
+                            <span className="input-group-addon"><i className="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input
+                                style={{ fontSize: '15px' }}
+                                className="form-control"
+                                type="text"
+                                name="description"
+                                placeholder="Enter your description..."
+                                value={this.state.description}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                    </div>
+                    {/* password */}
+                    <div className="form-group">
+                        <label>imageUrl</label>
+                        <input
+                            style={{ fontSize: '15px' }}
+                            className="form-control form-control-lg"
+                            type="imageUrl"
+                            name="imageUrl"
+                            placeholder="Enter your imageUrl..."
+                            value={this.state.imageUrl}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    {/* confirm password */}
+                    <div className="form-group">
+                        <label>name</label>
+                        <input
+                            style={{ fontSize: '15px' }}
+                            className="form-control form-control-lg"
+                            type="name"
+                            name="name"
+                            placeholder="Enter your name again..."
+                            value={this.state.name}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    {/* email */}
+                    <div className="form-group">
+                        <label>rooms</label>
+                        <input
+                            style={{ fontSize: '15px' }}
+                            className="form-control form-control-lg"
+                            type="text"
+                            name="rooms"
+                            placeholder="Enter your rooms..."
+                            value={this.state.rooms}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="text-center mt-2">
+                        <button type="submit" className="btn btn-lg btn-primary">Add Hotel</button>
+                    </div>
+                </form>
             </div>
-          </div>
-
-          <div className="col-md-9">
-            {/* Phần 7/7 của giao diện */}
-            <div>
-              <p>Tên: {users.id}</p>
-              <p>Email: {users.id}</p>
-              {/* Hiển thị các thông tin khác */}
-            </div>
-          </div>
-        </div>
-      </div>
-
-    // <div className="container">
-    //   <div>
-    //             <div className={styles.register_form_container}>
-    //                 <div className="panel-heading">
-    //                     <div className="panel-title text-center">  
-    //                         <h1 className="h2">{users.id}</h1>
-    //                         <hr />
-    //                     </div>
 
 
+        );
+    }
+}
 
-    //                 </div> 
-                    
-    //             </div>
-    //     </div>
-    // </div>
-  );
-};
-
-export default AddUser;
+export default AddHotel;
