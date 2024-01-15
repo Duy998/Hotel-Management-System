@@ -26,6 +26,9 @@ public class RoomConterver {
         roomDto.setId(roomEntity.getId());
         roomDto.setRoomName(roomEntity.getRoomName());
         roomDto.setActived(roomEntity.isActived());
+
+        roomDto.setHotel(hotelConverter.convertTHotelResponse(roomEntity.getHotel()));
+        roomDto.setRoomType(roomTypeConverter.convert(roomEntity.getRoomType()));
         return roomDto;
     }
 

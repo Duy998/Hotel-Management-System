@@ -1,12 +1,15 @@
 package com.nokia.hotel.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -39,6 +42,15 @@ public class RoomTypeEntity implements Serializable {
     @Column(name = "amount")
     private int amount;
 
+     @OneToMany(cascade=CascadeType.ALL, mappedBy = "roomType")	
+	private List<RoomEntity> rooms;
+    
+    public List<RoomEntity> getRooms() {
+        return rooms;
+    }
+    public void setRooms(List<RoomEntity> rooms) {
+        this.rooms = rooms;
+    }
     public void setId(Long id) {
         this.id = id;
     }

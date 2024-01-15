@@ -28,9 +28,7 @@ public class HotelConverter {
     }
 
     public HotelResponse convertTHotelResponse(HotelEntity hotelEntity) {
-        HotelResponse response = new HotelResponse();
-        response.setId(hotelEntity.getId());
-        response.setName(hotelEntity.getName());
+        HotelResponse response = new HotelResponse(hotelEntity.getName(), hotelEntity.getId());
         return response;
     }
 }

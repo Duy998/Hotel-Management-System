@@ -3,11 +3,11 @@ package com.nokia.hotel.payload.response;
 import com.nokia.hotel.service.dto.RoomTypeDto;
 
 public class RoomResponse {
-    Long id;
-    String name;
-    boolean isActived;
-    HotelResponse hotel;
-    RoomTypeDto roomType;
+    private Long id;
+    private String name;
+    private boolean isActived;
+    private HotelResponse hotel;
+    private RoomTypeDto roomType;
     public void setId(Long id) {
         this.id = id;
     }

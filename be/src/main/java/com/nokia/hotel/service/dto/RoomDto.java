@@ -1,11 +1,31 @@
 package com.nokia.hotel.service.dto;
 
+import com.nokia.hotel.payload.response.HotelResponse;
+
 public class RoomDto {
     private long id;
 
     private String roomName;
 
     private boolean isActived;
+    public HotelResponse getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(HotelResponse hotel) {
+        this.hotel = hotel;
+    }
+
+    private HotelResponse hotel;
+    private RoomTypeDto roomType;
+
+    public RoomTypeDto getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(RoomTypeDto roomType) {
+        this.roomType = roomType;
+    }
 
     public boolean isActived() {
         return isActived;

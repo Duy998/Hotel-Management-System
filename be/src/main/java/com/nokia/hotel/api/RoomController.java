@@ -25,6 +25,7 @@ import com.nokia.hotel.payload.response.MessageResponse;
 import com.nokia.hotel.payload.response.RoomResponse;
 import com.nokia.hotel.repository.HotelRepository;
 import com.nokia.hotel.repository.RoomTypeRepository;
+import com.nokia.hotel.service.dto.RoomDto;
 import com.nokia.hotel.service.impl.RoomService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -44,20 +45,19 @@ public class RoomController {
     @Autowired
     RoomTypeRepository roomTypeRepository;
 
-    @GetMapping("/room/{hotelId}")
-    public ResponseEntity<?> getRooms(@PathVariable Long hotelId, @RequestParam Long roomTypeId) {
+    @GetMapping("/{hotelId}/room")
+    public ResponseEntity<?> getRooms(@PathVariable Long hotelId, @RequestParam(name = "room-type-id", required = false) Long roomTypeId) {
         boolean isExistHotel = hotelRepository.existsById(hotelId);
 		if (!isExistHotel) return ResponseEntity.badRequest().body(new MessageResponse("Error: Hotel is not found!"));
         if (roomTypeId != null) {
             boolean isExistType = roomTypeRepository.existsById(roomTypeId);
 		    if (!isExistType) return ResponseEntity.badRequest().body(new MessageResponse("Error: Room type is not found!"));
-        }
-        
+        }       
         
         List<RoomEntity> list = service.getListRoom(hotelId, roomTypeId);
 		
-		List<RoomResponse> listDtos = list.stream()
-				.map(type -> converter.convertToRoomResponse(type))
+		List<RoomDto> listDtos = list.stream()
+				.map(type -> converter.convert(type))
 				.collect(Collectors.toList());
 		
 		return ResponseEntity.ok().body(new ApiResponse<>(listDtos,
@@ -66,7 +66,13 @@ public class RoomController {
 
     @PostMapping("/room")
     public ResponseEntity<?> addRooms(@RequestBody RoomRequest request) {
-        return ResponseEntity.ok().body(new ApiResponse<>(converter.convertToRoomResponse(service.addRoom(request)),
+		boolean isExistHotel = hotelRepository.existsById(request.getHotelId());
+		if (!isExistHotel) return ResponseEntity.badRequest().body(new MessageResponse("Error: Hotel is not found!"));
+        
+            boolean isExistType = roomTypeRepository.existsById(request.getRoomTypeId());
+		    if (!isExistType) return ResponseEntity.badRequest().body(new MessageResponse("Error: Room type is not found!"));
+        
+        return ResponseEntity.ok().body(new ApiResponse<>(converter.convert(service.addRoom(request)),
         LocalDate.now(),"Room added into DB."));
     }
 
@@ -75,7 +81,7 @@ public class RoomController {
 		boolean isExist = service.existRoom(id);
 		if (!isExist) return ResponseEntity.badRequest().body(new MessageResponse("Error: Room is not found!"));
 		
-		return ResponseEntity.ok().body(new ApiResponse<>(converter.convertToRoomResponse(service.getRoom(id)),
+		return ResponseEntity.ok().body(new ApiResponse<>(converter.convert(service.getRoom(id)),
 				LocalDate.now(),SUCCESS));
 	}
 
@@ -83,7 +89,7 @@ public class RoomController {
 	public ResponseEntity<?> updateRoom(@RequestBody RoomRequest roomRequest, @PathVariable Long id) {
 		boolean isExist = service.existRoom(id);
 		if (!isExist) return ResponseEntity.badRequest().body(new MessageResponse("Error: Room is not found!"));
-		return ResponseEntity.ok().body(new ApiResponse<>(converter.convertToRoomResponse(service.updateRoom(roomRequest, id)),
+		return ResponseEntity.ok().body(new ApiResponse<>(converter.convert(service.updateRoom(roomRequest, id)),
 				LocalDate.now(),"Room details updated successfully."));
 	}
 
